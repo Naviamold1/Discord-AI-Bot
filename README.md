@@ -46,7 +46,7 @@ python main.py
 
 ### Poetry Install (Optional)
 
-If you have [Poetry](https://python-poetry.org/), you can also install it for installation
+If you have [Poetry](https://python-poetry.org/), you can use that for installation
 
 ```sh
 poetry shell
