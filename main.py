@@ -28,7 +28,7 @@ class MyClient(discord.Client):
                 messages=[
                     {
                         "role": "user",
-                        "content": message.content.replace("!hello", ""),
+                        "content": message.content.replace(Creds.TRIGGER, ""),
                     },
                 ],
             )

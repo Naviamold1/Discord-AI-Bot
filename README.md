@@ -1,5 +1,8 @@
 <h1 align="center">Welcome to Discord AI Bot 👋</h1>
 <p>
+  <a href="https://github.com/astral-sh/ruff">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff" style="max-width:100%;">
+  </a>
   <a href="https://opensource.org/license/mit" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
@@ -17,6 +20,8 @@ Make sure you have installed following apps
 - [Python](https://www.python.org/downloads/)
 - [Ollama](https://ollama.com/download)
 
+To set up ollama and llama3
+
 ```sh
 ollama serve
 ollama run llama3
@@ -25,8 +30,18 @@ ollama run llama3
 > Run those 2 ollama commands in separate terminal instances AKA DON'T CLOSE the terminal after `ollama serve`
 
 ```sh
+git clone https://github.com/Naviamold1/Discord-AI-Bot
+cd Discord-AI-Bot
+cp example.env .env
+```
+
+- Fill out `.env` file with Discord `Token`, Bot `Trigger` word and optionally with an AI `Prompt`
+
+### Traditional Install
+
+```sh
 pip install -r requirements.txt
-ren example.env .env
+python main.py
 ```
 
 ### Poetry Install (Optional)
@@ -36,6 +51,7 @@ If you have [Poetry](https://python-poetry.org/), you can also install it for in
 ```sh
 poetry shell
 poetry install
+poetry run python main.py
 ```
 
 To also install dev dependencies
@@ -46,11 +62,7 @@ poetry install --with dev
 
 ## Usage
 
-- Fill out `.env` file with Discord `Token`, Bot `Trigger` word and optionally with an AI `Prompt`
-
-```sh
-py main.py
-```
+After the setup simply send a message with a `trigger` word (which you set up in `.env` file) at the beginning to start talking with a bot
 
 ## Author
 
@@ -61,7 +73,9 @@ py main.py
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check issues page.
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Naviamold1/Discord-AI-Bot/issues).
+
+If you do plan to contribute please install and set this up via [Poetry](#poetry-install-optional) and install dev dependencies.
 
 ## Show your support
 
