@@ -1,14 +1,14 @@
-import os
+from configparser import ConfigParser
 
-from dotenv import load_dotenv
+config = ConfigParser()
 
-load_dotenv()
+config.read("config.ini")
 
 
 class Creds:
-    TOKEN = os.getenv("TOKEN")
-    TRIGGER = os.getenv("TRIGGER")
-    PROMPT = os.getenv("PROMPT")
+    TOKEN = config.get("main", "TOKEN")
+    TRIGGER = config.get("main", "TRIGGER")
+    PROMPT = config.get("main", "PROMPT")
 
 
 def check_creds():

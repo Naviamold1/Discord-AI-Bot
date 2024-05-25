@@ -32,10 +32,10 @@ ollama run llama3
 ```sh
 git clone https://github.com/Naviamold1/Discord-AI-Bot
 cd Discord-AI-Bot
-cp example.env .env
+copy config.example.ini config.ini
 ```
 
-- Fill out `.env` file with Discord `Token`, Bot `Trigger` word and optionally with an AI `Prompt`
+- Fill out `config.ini` file with Discord `Token`, Bot `Trigger` word and optionally with an AI `Prompt`
 
 ### Traditional Install
 
@@ -62,7 +62,7 @@ poetry install --with dev
 
 ## Usage
 
-After the setup simply send a message with a `trigger` word (which you set up in `.env` file) at the beginning to start talking with a bot
+After the setup simply send a message with a `trigger` word (which you set up in `config.ini` file) at the beginning to start talking with a bot
 
 ## Author
 

@@ -6,9 +6,8 @@ authors = ["Ilia Arkania <iliaarkania13@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.8"
 discord-py-self = "^2.0.0"
-python-dotenv = "^1.0.1"
 ollama = "^0.2.0"
 
 

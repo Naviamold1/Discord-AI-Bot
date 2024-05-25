@@ -1,10 +1,7 @@
 import discord
 import ollama
-from dotenv import load_dotenv
 
 from selfbot.creds import Creds
-
-load_dotenv()
 
 modelfile = f"""
 FROM llama3
