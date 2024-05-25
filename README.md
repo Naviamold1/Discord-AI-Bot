@@ -20,7 +20,7 @@ Make sure you have installed following apps
 - [Python](https://www.python.org/downloads/)
 - [Ollama](https://ollama.com/download)
 
-To set up ollama and llama3
+To set up ollama and llama3:
 
 ```sh
 ollama serve
@@ -54,7 +54,7 @@ poetry install
 poetry run python main.py
 ```
 
-To also install dev dependencies
+To also install dev dependencies:
 
 ```sh
 poetry install --with dev
