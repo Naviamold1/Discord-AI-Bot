@@ -11,7 +11,7 @@
   </a>
 </p>
 
-> A Discord bot which you lets you chat with a custom AI 
+> A Discord bot which you lets you chat with a custom AI
 > Powered by Ollama and llama3
 
 ## Install

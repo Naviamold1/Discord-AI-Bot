@@ -6,10 +6,10 @@ config.read("config.ini")
 
 
 class Creds:
-    TOKEN = config.get("main", "TOKEN")
-    TRIGGER = config.get("main", "TRIGGER")
-    PROMPT = config.get("main", "PROMPT")
-
+    TOKEN = config.get("main", "token")
+    TRIGGER = config.get("main", "trigger")
+    PROMPT = config.get("main", "prompt")
+print(Creds.PROMPT)
 
 def check_creds():
     if not Creds.TOKEN:
