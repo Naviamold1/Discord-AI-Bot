@@ -8,9 +8,9 @@ config.read("config.ini")
 class Creds:
     TOKEN = config.get("auth", "token")
     TRIGGER = config.get("trigger", "custom_trigger_word")
+    ON_MENTION = config.getboolean("trigger", "respond_on_mention")
     MODEL = config.get("ai", "model")
     PROMPT = config.get("ai", "prompt")
-    ON_MENTION = config.getboolean("ai", "respond_on_mention")
     if config.getboolean("ai", "use_external_file_for_prompt"):
         with open("prompt.txt") as f:
             PROMPT = f.read()
