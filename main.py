@@ -24,11 +24,14 @@ class MyClient(discord.Client):
         if message.author.id == self.user.id:
             return
 
-        trigger = self.user.mentioned_in(message)
+        mentioned = None
+        triggered = None
+        if Creds.ON_MENTION:
+            mentioned = self.user.mentioned_in(message)
         if Creds.TRIGGER != "None":
-            trigger = message.content.startswith(Creds.TRIGGER)
+            triggered = message.content.startswith(Creds.TRIGGER)
 
-        if trigger:
+        if triggered or mentioned:
             response = ollama.chat(
                 model="custom",
                 messages=[
