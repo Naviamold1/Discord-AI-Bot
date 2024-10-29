@@ -10,7 +10,7 @@ class Creds:
     TRIGGER = config.get("trigger", "custom_trigger_word")
     MODEL = config.get("ai", "model")
     PROMPT = config.get("ai", "prompt")
-    ON_MENTION = config.getboolean("ai", "on_mention")
+    ON_MENTION = config.getboolean("ai", "respond_on_mention")
     if config.getboolean("ai", "use_external_file_for_prompt"):
         with open("prompt.txt") as f:
             PROMPT = f.read()
