@@ -36,7 +36,7 @@ cd Discord-AI-Bot
 copy config.example.ini config.ini
 ```
 
-- Fill out `config.ini` file with Discord `Token`, Bot `Trigger` word and optionally with an AI `Prompt`
+- Fill out `config.ini` file
 
 ### Traditional Install
 
@@ -63,7 +63,7 @@ poetry install --with dev
 
 ## Usage
 
-After the setup simply send a message with a `trigger` word (which you set up in `config.ini` file) at the beginning to start talking with a bot
+After the setup simply send a message with a trigger word or on mention (which you set up in `config.ini` file) to start talking to a bot
 
 ## Author
 

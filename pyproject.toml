@@ -6,13 +6,14 @@ authors = ["Ilia Arkania <iliaarkania13@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 discord-py-self = "^2.0.0"
-ollama = "^0.2.0"
+ollama = "^0.3.3"
 
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.4.5"
+ruff = "^0.7.1"
+
 
 [build-system]
 requires = ["poetry-core"]
