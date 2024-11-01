@@ -21,24 +21,47 @@ Make sure you have installed following apps
 - [Python](https://www.python.org/downloads/)
 - [Ollama](https://ollama.com/download)
 
-To set up ollama and llama3:
+To set up ollama:
 
 ```sh
 ollama serve
-ollama run llama3
 ```
 
-> Run those 2 ollama commands in separate terminal instances AKA DON'T CLOSE the terminal after `ollama serve`
+Pull the model of your choice (i.e. llama)
+
+```sh
+ollama llama3.2
+```
+
+> DON'T CLOSE the terminal after `ollama serve`, run other commands in another terminal instance
 
 ```sh
 git clone https://github.com/Naviamold1/Discord-AI-Bot
 cd Discord-AI-Bot
 copy config.example.ini config.ini
+copy ollama.example.modelfile ollama.modelfile
 ```
 
 - Fill out `config.ini` file
+- If you want to customize the AI behaviour edit the `ollama.modelfile` file
+
+After that run:
+
+```sh
+python model.py
+```
 
 ### Traditional Install
+
+> Preferably install with a virtual environment
+
+```sh
+pip install virtualenv
+python -m venv env
+source env/bin/activate
+env/Scripts/activate      # Windows
+source env/bin/activate   # Linux/Mac
+```
 
 ```sh
 pip install -r requirements.txt
@@ -47,7 +70,7 @@ python main.py
 
 ### Poetry Install (Optional)
 
-If you have [Poetry](https://python-poetry.org/), you can use that for installation
+> If you have [Poetry](https://python-poetry.org/), you can use that for installation
 
 ```sh
 poetry shell
@@ -63,7 +86,9 @@ poetry install --with dev
 
 ## Usage
 
-After the setup simply send a message with a trigger word or on mention (which you set up in `config.ini` file) to start talking to a bot
+- After the setup, simply send a message with a trigger word or on mention (which you set up in `config.ini` file) to start talking to a bot
+
+- Use `!ai clear` to clear AI context history (Set `admin_users_whitelist` in `config.ini` to control who can run that)
 
 ## Author
 
