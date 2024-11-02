@@ -1,3 +1,5 @@
+import time
+
 import discord
 import ollama
 
@@ -24,8 +26,12 @@ class MyClient(discord.Client):
         if Creds.TRIGGER != "None":
             triggered = message.content.startswith(Creds.TRIGGER)
 
-        if message.content.startswith('!ai clear'):
-            if message.author.id not in Creds.WHITELIST and Creds.WHITELIST != ["", ""] and Creds.WHITELIST:
+        if message.content.startswith("!ai clear"):
+            if (
+                message.author.id not in Creds.WHITELIST
+                and Creds.WHITELIST != ["", ""]
+                and Creds.WHITELIST
+            ):
                 pass
             self.history = []
             await message.reply("History cleared!", mention_author=True)
@@ -37,6 +43,10 @@ class MyClient(discord.Client):
             }
 
             cont = self.chat(mes)
+
+            if Creds.DELAY:
+                async with message.channel.typing():
+                    time.sleep(len(cont) / 20)
 
             await message.reply(cont, mention_author=True)
             print(self.history)

@@ -4,7 +4,8 @@ config = ConfigParser()
 
 config.read("config.ini")
 
-empties = ['[""]', '["", ""]', '[]', "none"]
+empties = ['[""]', '["", ""]', "[]", "none"]
+
 
 class Creds:
     TOKEN = config.get("auth", "token")
@@ -12,6 +13,7 @@ class Creds:
     TRIGGER = config.get("trigger", "custom_trigger_word")
     ON_MENTION = config.getboolean("trigger", "respond_on_mention")
     IGNORE_CASE = config.getboolean("trigger", "ignore_case")
+    DELAY = config.getboolean("misc", "artificial_delay")
 
 
 def check_creds():
@@ -19,7 +21,6 @@ def check_creds():
         raise Exception("\033[31mPlease set TOKEN in the config.ini file!")
     if Creds.WHITELIST in empties:
         Creds.WHITELIST = []
-
 
     print("\033[39m")
 
