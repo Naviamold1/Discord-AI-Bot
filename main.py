@@ -33,24 +33,14 @@ class MyClient(discord.Client):
             triggered = message.content.startswith(Creds.TRIGGER)
 
         if message.content.startswith("!ai clear"):
-            if (
-                message.author.id not in Creds.WHITELIST
-                and Creds.WHITELIST != ["", ""]
-                and Creds.WHITELIST
-            ):
-                pass
-            self.history = []
-            return await message.reply("History cleared!", mention_author=True)
+            if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
+                self.history = []
+                return await message.reply("History cleared!", mention_author=True)
 
         if message.content.startswith("!ai history"):
-            if (
-                message.author.id not in Creds.WHITELIST
-                and Creds.WHITELIST != ["", ""]
-                and Creds.WHITELIST
-            ):
-                pass
-            print(self.history)
-            return await message.reply("Check the terminal!", mention_author=True)
+            if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
+                print(self.history)
+                return await message.reply("Check the terminal!", mention_author=True)
 
         if triggered or mentioned:
             mes = {
