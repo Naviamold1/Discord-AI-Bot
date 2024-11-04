@@ -17,6 +17,7 @@ bot = commands.Bot(command_prefix="!ai ", user_bot=True)
 history = []
 lock = asyncio.Lock()
 
+
 async def is_whitelist(ctx: commands.Context):
     if ctx.author.id in Creds.WHITELIST and Creds.WHITELIST:
         return True
