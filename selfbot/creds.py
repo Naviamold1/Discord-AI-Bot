@@ -15,6 +15,7 @@ class Creds:
     ON_MENTION = config.getboolean("trigger", "respond_on_mention", fallback=True)
     IGNORE_CASE = config.getboolean("trigger", "ignore_case", fallback=True)
     DELAY = config.getboolean("misc", "artificial_delay", fallback=True)
+    DELAY_VALUE = config.getint("misc", "artificial_delay_value", fallback=20)
 
 
 def check_creds():

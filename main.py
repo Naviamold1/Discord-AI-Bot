@@ -58,18 +58,8 @@ async def on_message(message: discord.Message):
     triggered = None
     if Creds.ON_MENTION:
         mentioned = bot.user.mentioned_in(message)
-    if Creds.TRIGGER != "None":
+    if Creds.TRIGGER != "None" and Creds.TRIGGER:
         triggered = message.content.startswith(Creds.TRIGGER)
-
-    # if message.content.startswith("!ai clear"):
-    #     if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
-    #         self.history = []
-    #         return await message.reply("History cleared!", mention_author=True)
-
-    # if message.content.startswith("!ai history"):
-    #     if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
-    #         print(self.history)
-    #         return await message.reply("Check the terminal!", mention_author=True)
 
     if triggered or mentioned:
         mes = {
@@ -83,7 +73,7 @@ async def on_message(message: discord.Message):
         async with message.channel.typing():
             async with lock:
                 cont = chat(mes)
-                await asyncio.sleep(len(cont) / 20)
+                await asyncio.sleep(len(cont) / Creds.DELAY_VALUE)
 
         await message.reply(cont, mention_author=True)
 
