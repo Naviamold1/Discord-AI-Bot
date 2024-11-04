@@ -3,6 +3,7 @@ import logging
 
 import discord
 import ollama
+from discord.ext import commands
 
 from selfbot.creds import Creds
 
@@ -12,57 +13,85 @@ formatter = logging.Formatter(
 )
 
 
-class MyClient(discord.Client):
-    def __init__(self, **options):
-        super().__init__(self_bot=True, **options)
-        self.history = []
+bot = commands.Bot(command_prefix="!ai ", user_bot=True)
+history = []
+lock = asyncio.Lock()
 
-    async def on_ready(self):
-        print(f"Logged in as {self.user} (ID: {self.user.id})")
-        print("------")
+async def is_whitelist(ctx: commands.Context):
+    if ctx.author.id in Creds.WHITELIST and Creds.WHITELIST:
+        return True
+    if Creds.WHITELIST:
+        return True
+    return False
 
-    async def on_message(self, message: discord.Message):
-        if message.author.id == self.user.id:
-            return
 
-        mentioned = None
-        triggered = None
-        if Creds.ON_MENTION:
-            mentioned = self.user.mentioned_in(message)
-        if Creds.TRIGGER != "None":
-            triggered = message.content.startswith(Creds.TRIGGER)
+@bot.event
+async def on_ready():
+    print(f"Logged in as {bot.user} (ID: {bot.user.id})")
+    print("------")
 
-        if message.content.startswith("!ai clear"):
-            if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
-                self.history = []
-                return await message.reply("History cleared!", mention_author=True)
 
-        if message.content.startswith("!ai history"):
-            if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
-                print(self.history)
-                return await message.reply("Check the terminal!", mention_author=True)
+@bot.command(name="clear")
+@commands.check(is_whitelist)
+async def clear(ctx: commands.Context):
+    history.clear()
+    await ctx.send("History cleared!", mention_author=True)
 
-        if triggered or mentioned:
-            mes = {
-                "role": "user",
-                "content": f"{message.content.replace(f"<@{self.user.id}>", "")} | User's name: {message.author.name}",
-            }
 
-            if not Creds.DELAY:
-                return await message.reply(self.chat(mes), mention_author=True)
+@bot.command(name="history")
+@commands.check(is_whitelist)
+async def get_history(ctx: commands.Context):
+    print(history)
+    await ctx.send("Check the terminal!", mention_author=True)
 
-            async with message.channel.typing():
-                cont = self.chat(mes)
+
+@bot.event
+@commands.max_concurrency(1)
+async def on_message(message: discord.Message):
+    if message.author.id == bot.user.id:
+        return
+
+    await bot.process_commands(message)
+
+    mentioned = None
+    triggered = None
+    if Creds.ON_MENTION:
+        mentioned = bot.user.mentioned_in(message)
+    if Creds.TRIGGER != "None":
+        triggered = message.content.startswith(Creds.TRIGGER)
+
+    # if message.content.startswith("!ai clear"):
+    #     if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
+    #         self.history = []
+    #         return await message.reply("History cleared!", mention_author=True)
+
+    # if message.content.startswith("!ai history"):
+    #     if message.author.id in Creds.WHITELIST and Creds.WHITELIST:
+    #         print(self.history)
+    #         return await message.reply("Check the terminal!", mention_author=True)
+
+    if triggered or mentioned:
+        mes = {
+            "role": "user",
+            "content": f"{message.content.replace(f"<@{bot.user.id}>", "")} | User's name: {message.author.name}",
+        }
+
+        if not Creds.DELAY:
+            return await message.reply(chat(mes), mention_author=True)
+
+        async with message.channel.typing():
+            async with lock:
+                cont = chat(mes)
                 await asyncio.sleep(len(cont) / 20)
 
-            await message.reply(cont, mention_author=True)
-
-    def chat(self, message: str) -> str:
-        self.history.append(message)
-        response = ollama.chat(model="custom-discord-model", messages=self.history)
-        self.history.append(response["message"])
-        return response["message"]["content"]
+        await message.reply(cont, mention_author=True)
 
 
-client = MyClient()
-client.run(Creds.TOKEN, log_handler=handler, log_formatter=formatter)
+def chat(message: str) -> str:
+    history.append(message)
+    response = ollama.chat(model="custom-discord-model", messages=history)
+    history.append(response["message"])
+    return response["message"]["content"]
+
+
+bot.run(Creds.TOKEN, log_handler=handler, log_formatter=formatter)
