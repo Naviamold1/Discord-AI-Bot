@@ -1,7 +1,9 @@
 import json
+import sys
 from configparser import ConfigParser
 
 import colorama
+import ollama
 
 config = ConfigParser()
 
@@ -28,6 +30,22 @@ def check_creds():
         print(
             colorama.Fore.RED + "config.ini file is outdated" + colorama.Style.RESET_ALL
         )
+
+    if not Creds.TOKEN or Creds.TOKEN == "YOUR_DISCORD_TOKEN":
+        print(colorama.Fore.RED + "Account token is missing" + colorama.Style.RESET_ALL)
+        sys.exit()
+
+    if not Creds.WHITELIST:
+        print(
+            colorama.Fore.LIGHTYELLOW_EX
+            + "No whitelist set; everyone is able to run special commands"
+            + colorama.Style.RESET_ALL
+        )
+
+    ollama.chat(
+        model="custom-discord-model",
+        messages=[{"role": "user", "content": "ONLY SAY 1"}],
+    )
 
 
 check_creds()

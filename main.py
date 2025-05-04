@@ -61,7 +61,7 @@ async def on_message(message: discord.Message):
     if Creds.TRIGGER != "None" and Creds.TRIGGER:
         triggered = message.content.startswith(Creds.TRIGGER)
 
-    if triggered or mentioned:
+    if triggered or mentioned or type(message.channel) is discord.DMChannel:
         mes = {
             "role": "user",
             "content": f"{message.content.replace(f'<@{bot.user.id}>', '')} | User's name: {message.author.name}",
