@@ -64,7 +64,7 @@ async def on_message(message: discord.Message):
     if triggered or mentioned:
         mes = {
             "role": "user",
-            "content": f"{message.content.replace(f"<@{bot.user.id}>", "")} | User's name: {message.author.name}",
+            "content": f"{message.content.replace(f'<@{bot.user.id}>', '')} | User's name: {message.author.name}",
         }
 
         if not Creds.DELAY:

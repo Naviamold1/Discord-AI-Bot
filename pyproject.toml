@@ -1,23 +1,18 @@
-[tool.poetry]
-name = "selfbot"
+[project]
+name = "discord-ai-bot"
 version = "0.1.0"
-description = ""
-authors = ["Naviamold <89490126+Naviamold1@users.noreply.github.com>"]
+description = "Add your description here"
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "asyncio>=3.4.3",
+    "colorama>=0.4.6",
+    "discord-py-self>=2.0.1",
+    "ollama>=0.4.8",
+]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-discord-py-self = "^2.0.0"
-ollama = "^0.3.3"
-colorama = "^0.4.6"
-asyncio = "^3.4.3"
-
-
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.7.1"
-pre-commit = "^4.0.1"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[dependency-groups]
+dev = [
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.8",
+]
