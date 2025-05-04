@@ -27,31 +27,35 @@ To set up ollama:
 ollama serve
 ```
 
-Pull the model of your choice (i.e. llama)
-
-```sh
-ollama llama3.2
-```
-
 > DON'T CLOSE the terminal after `ollama serve`, run other commands in another terminal instance
 
 ```sh
 git clone https://github.com/Naviamold1/Discord-AI-Bot
 cd Discord-AI-Bot
 copy config.example.ini config.ini
-copy ollama.example.modelfile ollama.modelfile
+copy Modelfile.example Modelfile
 ```
 
 - Fill out `config.ini` file
-- If you want to customize the AI behaviour edit the `ollama.modelfile` file
+- If you want to customize the AI behaviour edit the `Modelfile` file
 
-After that run:
+Run the following to create the chatting model with the intended characteristics:
 
 ```sh
-python model.py
+ollama create custom-discord-model
+```
+
+### UV Install
+
+> If you have [uv](https://docs.astral.sh/uv/), you can use that for installation
+
+```sh
+uv run main.py
 ```
 
 ### Traditional Install
+
+If you don't want to use [uv](https://docs.astral.sh/uv/) proceed with this
 
 > Preferably install with a virtual environment
 
@@ -66,22 +70,6 @@ source env/bin/activate   # Linux/Mac
 ```sh
 pip install -r requirements.txt
 python main.py
-```
-
-### Poetry Install (Optional)
-
-> If you have [Poetry](https://python-poetry.org/), you can use that for installation
-
-```sh
-poetry shell
-poetry install
-poetry run python main.py
-```
-
-To also install dev dependencies:
-
-```sh
-poetry install --with dev
 ```
 
 ## Usage
@@ -101,7 +89,7 @@ poetry install --with dev
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Naviamold1/Discord-AI-Bot/issues).
 
-If you do plan to contribute please install and set this up via [Poetry](#poetry-install-optional) and install dev dependencies.
+If you do plan to contribute please install and set this up via [uv](#uv-install) and install dev dependencies.
 
 ## Show your support
 
